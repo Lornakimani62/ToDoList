@@ -2,6 +2,16 @@
     <div class="dashboard">
         <h1 class="subheading grey--text"><v-icon>dashboard</v-icon>Dashboard</h1>
             <v-container class="my-5"> 
+                <v-layout row class="mb-3">
+                    <v-btn small flat color="grey">
+                        <v-icon small left>folder</v-icon>
+                        <span class="caption text-lowercase" @click="sortBy('title')">By Project Name</span>
+                    </v-btn>
+                    <v-btn small flat color="grey">
+                        <v-icon small left>person</v-icon>
+                        <span class="caption text-lowercase" @click="sortBy('person')">By Person Name</span>
+                    </v-btn>
+                </v-layout>
                 <v-card flat class="pa-5" v-for="project in projects" :key="project.title">
                     <!-- Using typescript 6 so as to give styling according to a property in the array i.e the status property  -->
                     <v-layout row wrap :class="`pa-3 project ${project.status}`"> 
@@ -17,9 +27,10 @@
                            <div class="caption grey--text">Due By</div>
                             <div>{{project.due}}</div>
                         </v-flex>
-                         <v-flex xs2 sm4 md2>
-                           <div class="caption grey--text">Status</div>
-                            <div>{{project.status}}</div>
+                        <v-flex xs2 sm4 md2>
+                            <div class="right">
+                                <v-chip small :class="`${project.status} white--text my-2 caption`">{{ project.status }}</v-chip>
+                            </div>
                         </v-flex>
                     </v-layout>
                    
@@ -39,6 +50,12 @@ export default {
         { title: 'Create a community forum', person: 'Gakuyo', due: '20th Oct 2019', status: 'ongoing',},
       ]
     }
+  },
+  methods:{
+      sortBy(prop){
+        //  Sort takes a callback funtion with two parameters compares the two values
+          this.projects.sort((a,b)=>a[prop]< b[prop] ? -1:1)
+      }
   }
 }
 </script>
@@ -53,4 +70,14 @@ export default {
 .project.overdue{
   border-left: 4px solid tomato;
 }
+.v-chip.complete{
+  background: #3cd1c2;
+}
+.v-chip.ongoing{
+  background: #ffaa2c;
+}
+.v-chip.overdue{
+  background: #f83e70;
+}
+
 </style>
