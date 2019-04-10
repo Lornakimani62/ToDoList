@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Dashboard from './views/dashboard.vue'
-import Project from './views/dashboard.vue'
-import Team from './views/team.vue'
+import Dashboard from '@/views/Dashboard.vue'
+import Project from '@/views/Project.vue'
+import Team from '@/views/Team.vue'
 
 Vue.use(Router)
 
@@ -18,7 +18,7 @@ export default new Router({
     {
       path: '/projects',
       name: 'projects',
-     component: Project
+      component: Project
     },
     {
       path: '/team',

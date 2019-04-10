@@ -1,9 +1,9 @@
 <template>
     <nav>
         <!-- The toolbar is used to create a navigation bar dark specifies a prop used for stying and app makes the bar remain static -->
-        <v-toolbar dark app> 
+        <v-toolbar color="grey darken-3" dark app> 
             <v-toolbar-side-icon dark @click='drawer=!drawer'></v-toolbar-side-icon>
-            <v-toolbar-title class="text-uppercase dark lighten-2">
+            <v-toolbar-title class="text dark lighten-2">
                 <span class="font-weight-light left">Todo</span>
                 <span>Lorna</span>
             </v-toolbar-title>  
@@ -14,9 +14,9 @@
                 </v-btn>
 
         </v-toolbar>
-        <v-navigation-drawer app v-model="drawer" class="orange">
+        <v-navigation-drawer app v-model="drawer" class="teal darken-2">
             <v-list>
-                <v-list-tile v-for="link in links" :key="link.text" router :to="link.route">
+                <v-list-tile v-for="link in links" :key="link.text"  :to="link.route">
                 <v-list-tile-action>
                     <v-icon class="white--text">{{link.icon}}</v-icon>
                 </v-list-tile-action>
@@ -39,7 +39,6 @@ export default{
                  {icon:'home', text:'Home', route:'/'},
                  {icon:'folder_open', text:'Projects', route:'/projects'},
                  {icon:'person', text:'Team', route:'/team'},
-                 {}
              ]
          }
      }
