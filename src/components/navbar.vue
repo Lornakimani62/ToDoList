@@ -15,6 +15,14 @@
 
         </v-toolbar>
         <v-navigation-drawer app v-model="drawer" class="teal darken-2">
+            <v-layout column align center>
+                <v-flex class="class mt-5">
+                    <v-avatar size="100" class="mx-5">
+                        <img src="avatar-1.png">
+                    </v-avatar>
+                    <p class="white--text subheading mx-5">Lorna Kimani</p>
+                </v-flex>
+            </v-layout>
             <v-list>
                 <v-list-tile v-for="link in links" :key="link.text"  :to="link.route">
                 <v-list-tile-action>
