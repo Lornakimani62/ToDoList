@@ -47,15 +47,11 @@
 </template>
 
 <script>
+import db from '@/fb'
 export default {
     data(){
     return {
-      projects: [
-        { title: 'Design a new website', person: 'Lorna Kimani', due: '1st Jan 2019', status: 'complete'},
-        { title: 'Code up the homepage', person: 'Developer Barbie', due: '10th Jan 2019', status: 'overdue', },
-        { title: 'Design video thumbnails', person: 'Barbie Element', due: '20th Dec 2019', status: 'ongoing', },
-        { title: 'Create a community forum', person: 'Gakuyo', due: '20th Oct 2019', status: 'ongoing',},
-      ]
+      projects: []
     }
   },
   methods:{
@@ -63,7 +59,22 @@ export default {
         //  Sort takes a callback funtion with two parameters compares the two values
           this.projects.sort((a,b)=>a[prop]< b[prop] ? -1:1)
       }
-  }
+  },
+
+  // Get method using firestore
+created() {
+  db.collection('Projects').onSnapshot(res =>{
+    const changes = res.docChanges();
+    changes.forEach(change =>{
+      if (change.type === 'added'){
+        this.projects.push({
+          ...change.doc.data(),
+          id: change.doc.id
+        })
+      }
+    })
+  })
+}
 }
 </script>
 <style>
